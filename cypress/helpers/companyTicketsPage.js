@@ -1,4 +1,7 @@
 
+const ENDPOINT_GET_COMPANYVALIDITY = 'https://www.filmstaden.se/api/v2/discount/'
+
+
 function goToTicketBalanceChecker() {
     cy.get(':nth-child(1) > .giftcard-information__btn-wrapper > .a-btn').click({force: true})
 }
@@ -23,6 +26,16 @@ function assertTwelveNumbers() {
     cy.get('.companyTicketBalance__formInputBlock--valid').should('exist')
 }
 
+function backendTicketBalanceOnInvalidTicket(ticketNumber) {
+    cy.request({
+        method: 'GET',
+        url: ENDPOINT_GET_COMPANYVALIDITY + ticketNumber,
+        failOnStatusCode: false
+    }).then((response => {
+        expect(response.status).to.eq(404)
+    }))
+}
+
 
 module.exports = {
     goToTicketBalanceChecker,
@@ -30,5 +43,6 @@ module.exports = {
     assertInvalidCompanyTicket,
     typeTicketNumber,
     assertNotTwelveNumbers,
-    assertTwelveNumbers
+    assertTwelveNumbers,
+    backendTicketBalanceOnInvalidTicket
 }

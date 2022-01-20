@@ -1,3 +1,7 @@
+
+const ENDPOINT_GET_CITYFILTER = 'https://www.filmstaden.se/api/v2/cinema/sv/1/100?filter.cityAlias='
+
+
 function checkCity(city) {
     cy.get('.drop-down-radio-btn > .a-btn > .a-btn__label').should('contain', city)
 
@@ -50,6 +54,18 @@ function goToTicketsPage() {
     cy.get('.ncgNavigationInnerWrapper > :nth-child(3) > :nth-child(1) > .au-target').click()
 }
 
+function backendCityFilter(cityAlias) {
+    cy.request({
+        method: 'GET',
+        url: ENDPOINT_GET_CITYFILTER + cityAlias
+    }).then((response => {
+        const responseAsString = JSON.stringify(response.body)
+        expect(responseAsString).to.have.string('\"alias\":\"' + cityAlias + '\"')
+        expect(response.status).to.eq(200)
+
+    }))
+}
+
 module.exports = {
     checkCity,
     changeCity,
@@ -59,5 +75,6 @@ module.exports = {
     searchByEnter,
     goToShop,
     goToCompanyTicketsPage,
-    goToTicketsPage
+    goToTicketsPage,
+    backendCityFilter
 }

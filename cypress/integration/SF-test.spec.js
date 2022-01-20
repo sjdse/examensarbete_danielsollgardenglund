@@ -15,7 +15,23 @@ describe('Regression testing suite - Filmstaden', function () {
         cy.get('.dialog-city-selection__save-btn-wrapper > .a-btn').click() //accept default city
     })
 
+    it('TC10 - Video player functions', function(){
+        //This test sometimes fails because the video won't load. Tried using cy.wait to delay playing the video to let it load without success.
+        header.changepageToMoviesAndTrailers()
 
+        moviesTrailers.playFirstTrailer()
+
+        //cy.wait(2000)
+        moviesTrailers.CheckHiddenVideoControls() 
+
+        moviesTrailers.videoPlayerPause()
+        moviesTrailers.videoPlayerUnpause()
+
+        moviesTrailers.videoPlayerMute()
+        moviesTrailers.videoPlayerUnmute()
+
+        moviesTrailers.videoPlayerClose()
+    })
 
     it('TC01 - Check reservation with phone number', function(){
         var phoneNumber = '0701234567'
@@ -112,21 +128,5 @@ describe('Regression testing suite - Filmstaden', function () {
         ticket.assertDayOnBookingPage(filterChoice)
     })
 
-    it('TC10 - Video player functions', function(){
-        //This test sometimes fails because the video won't load. Tried using cy.wait to delay playing the video to let it load without success.
-        header.changepageToMoviesAndTrailers()
 
-        moviesTrailers.playFirstTrailer()
-
-        //cy.wait(2000)
-        moviesTrailers.CheckHiddenVideoControls() 
-
-        moviesTrailers.videoPlayerPause()
-        moviesTrailers.videoPlayerUnpause()
-
-        moviesTrailers.videoPlayerMute()
-        moviesTrailers.videoPlayerUnmute()
-
-        moviesTrailers.videoPlayerClose()
-    })
 })
