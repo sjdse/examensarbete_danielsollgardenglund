@@ -27,8 +27,9 @@ function filterMovieByDay(dayFilter) {
 }
 
 function openFirstAvailableMovie() {
-    cy.get(':nth-child(1) > .show-schedule__list-grouped-by-movie > .show-schedule__list-item-grouped-by-movie > .show-schedule-grouped-by-movie__outerwrapper > .show-schedule-grouped-by-movie__innerwrapper > .show-schedule-grouped-by-movie__content > .thumbnail-movie-list__btn-outerwrapper > .thumbnail-movie-list__btn-innerwrapper > .a-btn').click({force: true})
+    cy.get(':nth-child(1) > .list > :nth-child(1) > .show-schedule-grouped-by-movie__outerwrapper > .show-schedule-grouped-by-movie__innerwrapper > .show-schedule-grouped-by-movie__content > .thumbnail-movie-list__btn-outerwrapper > .thumbnail-movie-list__btn-innerwrapper > .a-btn').click({force: true})
     cy.get(':nth-child(1) > .show-schedule-grouped-by-movie-show__url > .show-schedule-grouped-by-movie-show__url-inner').first().click({force: true})
+    
     cy.wait(2000)
 }
 
