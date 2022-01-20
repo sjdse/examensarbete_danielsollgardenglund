@@ -101,7 +101,7 @@ describe('Regression testing suite - Filmstaden', function () {
         ticket.assertMovieIsListed(movieName)
     })
 
-    it.only('TC09 - Ticket filter - day', function() {
+    it('TC09 - Ticket filter - day', function() {
         var filterChoice = 'imorgon'
 
         header.goToTicketsPage()
